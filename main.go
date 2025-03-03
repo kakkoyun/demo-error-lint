@@ -34,7 +34,7 @@ func processData() error {
 	err := fetchData()
 	if err != nil {
 		// ISSUE: Using %v instead of %w in fmt.Errorf
-		return fmt.Errorf("failed to process data: %v", err)
+		return fmt.Errorf("failed to process data: %w", err)
 	}
 	return nil
 }
@@ -110,7 +110,7 @@ func main() {
 	inputErr := errors.New("input validation failed")
 
 	// ISSUE: Using fmt.Errorf without %w
-	wrappedErr := fmt.Errorf("operation failed: %v", inputErr)
+	wrappedErr := fmt.Errorf("operation failed: %w", inputErr)
 	fmt.Println(wrappedErr)
 
 	// Correct way
@@ -122,7 +122,7 @@ func main() {
 	err2 := errors.New("second error")
 
 	// ISSUE: Multiple %v in fmt.Errorf
-	combinedErr := fmt.Errorf("multiple errors: %v and %v", err1, err2)
+	combinedErr := fmt.Errorf("multiple errors: %w and %w", err1, err2)
 	fmt.Println(combinedErr)
 
 	// Demo 7: Special case with sql.ErrNoRows
@@ -151,7 +151,7 @@ func customOperation() error {
 	file, err := os.Open("nonexistent.txt")
 	if err != nil {
 		// ISSUE: Not using %w
-		return fmt.Errorf("could not open file: %v", err)
+		return fmt.Errorf("could not open file: %w", err)
 	}
 	defer file.Close()
 
@@ -164,7 +164,7 @@ func customOperation() error {
 
 	// ISSUE: Using strings.Contains instead of errors.Is
 	if strings.Contains(err.Error(), "permission denied") {
-		return fmt.Errorf("permission issue: %v", err)
+		return fmt.Errorf("permission issue: %w", err)
 	}
 
 	return nil

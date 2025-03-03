@@ -22,7 +22,7 @@ lint:
 
 # Run the error linter with auto-fix
 lint-fix:
-	go tool go-errorlint -fix ./...
+	go tool go-errorlint -errorf -fix ./...
 
 # Run tests (if you add them later)
 test:
